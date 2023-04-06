@@ -1,6 +1,5 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { defineComponent } from '@/components/HouseholdMain.vue';
   export default defineComponent({
     props: {
       msg: {

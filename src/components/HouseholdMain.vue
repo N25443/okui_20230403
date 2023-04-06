@@ -6,16 +6,14 @@
     props: {
       msg: {
         type: String,
-        required: true,
       },
-      formMessage: String,
     },
     setup(props) {
-      const formMessage = '家計簿に追加';
-      const formTable = '家計簿';
-      return { props, formMessage, formTable };
+      return { props };
     },
   });
+  const formMessage = '家計簿に追加';
+  const formTable = '家計簿';
 </script>
 
 <template>
@@ -27,9 +25,10 @@
       <p>fuga</p>
       <p>piyo</p>
     </div>
-    <div class="main">
-      <Form msg="Form" />
-      <Table msg="Table" />
+    <div>
+      aaa
+      <Form formMessage="Form" />
+      <Table tableMessage="Table" />
     </div>
   </div>
 </template>
