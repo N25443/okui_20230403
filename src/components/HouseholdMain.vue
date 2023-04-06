@@ -1,19 +1,20 @@
-<script lang="ts">
-  import { defineComponent } from 'vue';
+<script setup lang="ts">
+  // import { defineComponent } from 'vue';
   import Form from '@/components/Form.vue';
   import Table from '@/components/Table.vue';
-  export default defineComponent({
-    props: {
-      msg: {
-        type: String,
-      },
-    },
-    setup(props) {
-      return { props };
-    },
-  });
-  const formMessage = '家計簿に追加';
-  const formTable = '家計簿';
+  // export default defineComponent({
+  //   props: {
+  //     msg: {
+  //       type: String,
+  //       required: true,
+  //     },
+  //   },
+  //   setup(props) {
+  //     return { props };
+  //   },
+  // });
+  const formMessage = '入力';
+  const tableMessage = '家計簿';
 </script>
 
 <template>
@@ -21,14 +22,14 @@
     <!--サイドバーとメインページを横並びにする-->
     <div class="w-48 bg-blue-200 text-blue-800 min-h-screen px-4 pt-16">
       <p class="text-xl font-bold border-b border-blue-800 mb-2">Menu</p>
-      <p>hoge</p>
-      <p>fuga</p>
-      <p>piyo</p>
+      <p>入力</p>
+      <p>家計簿</p>
     </div>
-    <div>
-      aaa
-      <Form formMessage="Form" />
-      <Table tableMessage="Table" />
+    <div class="w-80">
+      <Form v-bind:formMessage="formMessage" />
+    </div>
+    <div class="w-80">
+      <Table v-bind:tableMessage="tableMessage" />
     </div>
   </div>
 </template>

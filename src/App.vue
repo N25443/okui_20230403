@@ -8,7 +8,10 @@
 
 <template>
   <div>
-    <HouseholdMain msg="HouseholdMain" />
+    <div class="text-5xl text-bold bg-blue-500">家計簿アプリ</div>
+    <div>
+      <HouseholdMain msg="HouseholdMain" />
+    </div>
   </div>
 </template>
 <style scoped></style>
