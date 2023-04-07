@@ -7,10 +7,75 @@
         required: true,
       },
     },
+    houseHolds: {
+      type: {
+        day: String,
+        genre: String,
+        content: String,
+        money: Number,
+        way: String,
+        table6: Number,
+        table7: Number,
+        table8: Number,
+        table9: Number,
+        table10: Number,
+      },
+    },
     setup(props) {
-      return { props };
+      return { props, houseHolds };
     },
   });
+
+  const houseHolds = [
+    {
+      day: '4/10',
+      genre: '食費',
+      content: 'スーパー',
+      money: '2500',
+      way: 'PayPay',
+      table6: '0',
+      table7: '0',
+      table8: '0',
+      table9: '0',
+      table10: '0',
+    },
+    {
+      day: '4/11',
+      genre: '食費',
+      content: 'スーパー',
+      money: '2500',
+      way: 'PayPay',
+      table6: '0',
+      table7: '0',
+      table8: '0',
+      table9: '0',
+      table10: '0',
+    },
+    {
+      day: '4/12',
+      genre: '食費',
+      content: 'スーパー',
+      money: '2500',
+      way: 'PayPay',
+      table6: '0',
+      table7: '0',
+      table8: '0',
+      table9: '0',
+      table10: '0',
+    },
+    {
+      day: '4/13',
+      genre: '食費',
+      content: 'スーパー',
+      money: '2500',
+      way: 'PayPay',
+      table6: '0',
+      table7: '0',
+      table8: '0',
+      table9: '0',
+      table10: '0',
+    },
+  ];
 </script>
 
 <template>
