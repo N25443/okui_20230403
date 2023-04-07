@@ -2,22 +2,14 @@
   // import { defineComponent } from 'vue';
   import Form from '@/components/Form.vue';
   import Table from '@/components/Table.vue';
-  // export default defineComponent({
-  //   props: {
-  //     msg: {
-  //       type: String,
-  //       required: true,
-  //     },
-  //   },
-  //   setup(props) {
-  //     return { props };
-  //   },
-  // });
   const formMessage = '入力';
   const tableMessage = '家計簿';
 </script>
 
 <template>
+  <li v-for="(tab, index) in tabList" :key="index">
+    <label for=""></label>
+  </li>
   <div class="flex">
     <!--サイドバーとメインページを横並びにする-->
     <div class="w-48 bg-blue-200 text-blue-800 min-h-screen px-4 pt-16">
