@@ -1,27 +1,19 @@
-<script lang="ts">
-  import { defineComponent } from 'vue';
+<script setup lang="ts">
   import Form from '@/components/Form.vue';
   import Table from '@/components/Table.vue';
-  export default defineComponent({
-    components: { Form, Table },
-    props: {
-      msg: {
-        type: String,
-        required: true,
-      },
-    },
-    setup(props) {
-      return { props, formMessage, tableMessage };
-    },
-  });
+  import { ref } from 'vue';
   const formMessage = '入力';
   const tableMessage = '家計簿';
+  // 初期値はForm.vue
+  const activeTab = ref(Form.vue);
+  // ボタン押下時のアクションをメソッド定義
+  const onButtonClick = (tabName: string): void => {
+    activeTab.value = tabName;
+    // console.log('あああ');
+  };
 </script>
 
 <template>
-  <li v-for="(tab, index) in tabList" :key="index">
-    <label for=""></label>
-  </li>
   <div class="flex">
     <!--サイドバーとメインページを横並びにする-->
     <div class="fixed left-0 top-0 bg-blue-200 text-blue-800 min-h-screen px-10 pt-16">
@@ -29,11 +21,15 @@
       <p>入力</p>
       <p>家計簿</p>
     </div>
-    <div class="fixed left-40 top-14">
-      <Form v-bind:formMessage="formMessage" />
+    <!-- タブ切替 -->
+    <button @click="onButtonClick(Form.vue)">Formタブ</button>
+    <button @click="onButtonClick(Table.vue)">Tableタブ</button>
+
+    <div v-if="activeTab === Form.vue">
+      <Form v-model:formMessage="formMessage" />
     </div>
-    <div class="fixed left-40 top-40">
-      <Table v-bind:tableMessage="tableMessage" />
+    <div v-if="activeTab === Table.vue">
+      <Table v-model:tableMessage="tableMessage" />
     </div>
   </div>
 </template>
