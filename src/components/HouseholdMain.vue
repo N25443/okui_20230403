@@ -5,7 +5,7 @@
   const formMessage = '入力';
   const tableMessage = '家計簿';
   // 初期値はForm.vue
-  const activeTab = ref(Form.vue);
+  const activeTab = ref('Form.vue');
   // ボタン押下時のアクションをメソッド定義
   const onButtonClick = (tabName: string): void => {
     activeTab.value = tabName;

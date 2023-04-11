@@ -1,6 +1,5 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
-  // import { ref } from 'vue';
   export default defineComponent({
     props: {
       tableMessage: {
@@ -10,7 +9,7 @@
     },
 
     setup(props) {
-      type houseHolds = {
+      type HouseHolds = {
         day: string;
         genre: string;
         content: string;
@@ -25,7 +24,6 @@
       return { props, houseHolds };
     },
   });
-
   const houseHolds = [
     {
       day: '4/10',
@@ -93,6 +91,7 @@
       <th>table9　</th>
       <th>table10　</th>
     </tr>
+
     <tr v-for="houseHold in houseHolds" :key="houseHold.day">
       <td>{{ houseHold.day }}</td>
       <td>{{ houseHold.genre }}</td>
