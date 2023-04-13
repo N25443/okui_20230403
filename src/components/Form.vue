@@ -22,7 +22,6 @@
     <span> {{ props.formMessage }} </span>
     <br />
     <label>年月日</label>
-    <input type="text" v-on:input="setCostType" />
     <select>
       <option value="year">2023</option>
     </select>
