@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { defineComponent, reactive } from 'vue';
+  import { defineComponent } from 'vue';
+  // import { ref } from 'vue';
   export default defineComponent({
     props: {
       tableMessage: {
@@ -7,73 +8,100 @@
         required: true,
       },
     },
-
     setup(props) {
       type HouseHolds = {
-        date: number;
         day: string;
-        foodCost: number | null;
-        fixedCost: number | null;
+        genre: string;
+        content: string;
+        money: number;
+        way: string;
+        table6?: number;
+        table7?: number;
+        table8?: number;
+        table9?: number;
+        table10?: number;
       };
       return { props, houseHolds };
     },
   });
-  const tableClass: string[] = ['', '火', '水', '木', '金', '土', '日'];
-  // const d: Day = new Day();
-  // const i = d.getFullYear() % 7;
-  // alert(tableClass[i]);
-  // テーブルをリアクティブなオブジェクトで定義
-  const houseHolds = reactive([
-    { date: 1, day: '土', foodCost: null, fixedCost: null },
-    { date: 2, day: '日', foodCost: null, fixedCost: null },
-    { date: 3, day: '月', foodCost: null, fixedCost: null },
-    { date: 4, day: '火', foodCost: null, fixedCost: null },
-    { date: 5, day: '水', foodCost: null, fixedCost: null },
-    { date: 6, day: '木', foodCost: null, fixedCost: null },
-    { date: 7, day: '金', foodCost: null, fixedCost: null },
-    { date: 8, day: '土', foodCost: null, fixedCost: null },
-    { date: 9, day: '日', foodCost: null, fixedCost: null },
-    { date: 10, day: '月', foodCost: null, fixedCost: null },
-    { date: 11, day: '火', foodCost: null, fixedCost: null },
-    { date: 12, day: '水', foodCost: null, fixedCost: null },
-    { date: 13, day: '木', foodCost: null, fixedCost: null },
-    { date: 14, day: '金', foodCost: null, fixedCost: null },
-    { date: 15, day: '土', foodCost: null, fixedCost: null },
-    { date: 16, day: '日', foodCost: null, fixedCost: null },
-    { date: 17, day: '月', foodCost: null, fixedCost: null },
-    { date: 18, day: '火', foodCost: null, fixedCost: null },
-    { date: 19, day: '水', foodCost: null, fixedCost: null },
-    { date: 20, day: '木', foodCost: null, fixedCost: null },
-    { date: 21, day: '金', foodCost: null, fixedCost: null },
-    { date: 22, day: '土', foodCost: null, fixedCost: null },
-    { date: 22, day: '日', foodCost: null, fixedCost: null },
-    { date: 23, day: '月', foodCost: null, fixedCost: null },
-    { date: 24, day: '火', foodCost: null, fixedCost: null },
-    { date: 25, day: '水', foodCost: null, fixedCost: null },
-    { date: 26, day: '木', foodCost: null, fixedCost: null },
-    { date: 27, day: '金', foodCost: null, fixedCost: null },
-    { date: 28, day: '土', foodCost: null, fixedCost: null },
-    { date: 29, day: '日', foodCost: null, fixedCost: null },
-    { date: 30, day: '月', foodCost: null, fixedCost: null },
-    { date: 31, day: '火', foodCost: null, fixedCost: null },
-  ]);
+  const houseHolds = [
+    {
+      day: '4/10',
+      genre: '食費',
+      content: 'スーパー',
+      money: '2500',
+      way: 'PayPay',
+      table6: '0',
+      table7: '0',
+      table8: '2',
+      table9: '0',
+      table10: '0',
+    },
+    {
+      day: '4/11',
+      genre: '交通費',
+      content: '飛行機',
+      money: '2500',
+      way: 'PayPay',
+      table6: '3',
+      table7: '0',
+      table8: '0',
+      table9: '0',
+      table10: '0',
+    },
+    {
+      day: '4/12',
+      genre: '食費',
+      content: 'スーパー',
+      money: '2500',
+      way: '現金',
+      table6: '0',
+      table7: '0',
+      table8: '7',
+      table9: '0',
+      table10: '0',
+    },
+    {
+      day: '4/13',
+      genre: '食費',
+      content: '外食',
+      money: '2500',
+      way: 'PayPay',
+      table6: '0',
+      table7: '6',
+      table8: '0',
+      table9: '0',
+      table10: '10',
+    },
+  ];
 </script>
 
 <template>
   <span> {{ props.tableMessage }} </span>
-  <!-- テーブルを表示 -->
   <table class="table-auto border-2">
     <tr class="bg-blue-900 text-indigo-100">
-      <th>日付　</th>
-      <th>曜日　</th>
-      <th>食費　　　</th>
-      <th>固定費　　</th>
+      <th>日付　　</th>
+      <th>ジャンル 　　　</th>
+      <th>内容　　　　　　</th>
+      <th>金額(円)　　</th>
+      <th>支払方法　　</th>
+      <th>table6　</th>
+      <th>table7　</th>
+      <th>table8　</th>
+      <th>table9　</th>
+      <th>table10　</th>
     </tr>
-    <tr v-for="houseHold in houseHolds" :key="houseHold.date" v-bind="tableClass[i]">
-      <td>{{ houseHold.date }}</td>
+    <tr v-for="houseHold in houseHolds" :key="houseHold.day">
       <td>{{ houseHold.day }}</td>
-      <td>{{ houseHold.foodCost }}</td>
-      <td>{{ houseHold.fixedCost }}</td>
+      <td>{{ houseHold.genre }}</td>
+      <td>{{ houseHold.content }}</td>
+      <td>{{ houseHold.money }}</td>
+      <td>{{ houseHold.way }}</td>
+      <td>{{ houseHold.table6 }}</td>
+      <td>{{ houseHold.table7 }}</td>
+      <td>{{ houseHold.table8 }}</td>
+      <td>{{ houseHold.table9 }}</td>
+      <td>{{ houseHold.table10 }}</td>
     </tr>
   </table>
 </template>

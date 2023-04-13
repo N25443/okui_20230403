@@ -22,13 +22,13 @@
       <p>家計簿</p>
     </div>
     <!-- タブ切替 -->
-    <button @click="onButtonClick(Form.vue)">Formタブ</button>
-    <button @click="onButtonClick(Table.vue)">Tableタブ</button>
+    <button @click="onButtonClick('Form.vue')">Formタブ</button>
+    <button @click="onButtonClick('Table.vue')">Tableタブ</button>
 
-    <div v-if="activeTab === Form.vue">
+    <div v-if="activeTab === 'Form.vue'">
       <Form v-model:formMessage="formMessage" />
     </div>
-    <div v-if="activeTab === Table.vue">
+    <div v-if="activeTab === 'Table.vue'">
       <Table v-model:tableMessage="tableMessage" />
     </div>
   </div>
