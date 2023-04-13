@@ -4,7 +4,7 @@
   import { ref } from 'vue';
   const formMessage = '入力';
   const tableMessage = '家計簿';
-  // 初期値はForm.vue
+  // 選択しているタブをactiveTabとして設定
   const activeTab = ref('Form.vue');
   // ボタン押下時のアクションをメソッド定義
   const onButtonClick = (tabName: string): void => {
@@ -25,10 +25,10 @@
     <button @click="onButtonClick('Table.vue')">Tableタブ</button>
 
     <div v-if="activeTab === 'Form.vue'">
-      <Form v-model:formMessage="formMessage" />
+      <Form v-bind:formMessage="formMessage" />
     </div>
     <div v-if="activeTab === 'Table.vue'">
-      <Table v-model:tableMessage="tableMessage" />
+      <Table v-bind:tableMessage="tableMessage" />
     </div>
   </div>
 </template>
