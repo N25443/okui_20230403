@@ -17,12 +17,12 @@
       // const d: Day = new Day();
       // const i = d.getFullYear() % 7;
       // alert(tableClass[i]);
-      const formMessage = '入力';
+      const formMessage = '入力フォーム';
       const tableMessage = '家計簿';
       // 表示するタブを識別する変数
       const activeTab = ref('Form.vue');
       // ボタン押下時のアクションをメソッド定義
-      const onButtonClick = (tabName: string): void => {
+      const onTabButtonClick = (tabName: string): void => {
         activeTab.value = tabName;
       };
 
@@ -60,7 +60,7 @@
         { date: 30, day: '月', foodCost: null, fixedCost: null },
         { date: 31, day: '火', foodCost: null, fixedCost: null },
       ]);
-      return { props, formMessage, tableMessage, activeTab, onButtonClick, houseHolds };
+      return { props, formMessage, tableMessage, activeTab, onTabButtonClick, houseHolds };
     },
   });
 </script>
@@ -70,18 +70,23 @@
     <!--サイドバーとメインページを横並びにする-->
     <div class="fixed left-0 top-0 bg-blue-200 text-blue-800 min-h-screen px-10 pt-16">
       <p class="text-xl font-bold border-b border-blue-800 mb-2">Menu</p>
-      <p>入力</p>
-      <p>家計簿</p>
+      <!-- タブ切替 -->
+      <div>
+        <div>
+          <button class="underline hover:underline-offset-4" @click="onTabButtonClick('Form.vue')">Formタブ</button>
+        </div>
+        <div>
+          <button class="underline hover:underline-offset-4" @click="onTabButtonClick('Table.vue')">Tableタブ</button>
+        </div>
+      </div>
     </div>
-    <!-- タブ切替 -->
-    <button @click="onButtonClick('Form.vue')">Formタブ</button>
-    <button @click="onButtonClick('Table.vue')">Tableタブ</button>
-
-    <div v-if="activeTab === 'Form.vue'">
-      <Form v-bind:formMessage="formMessage" />
-    </div>
-    <div v-if="activeTab === 'Table.vue'">
-      <Table v-model:houseHolds="houseHolds" v-bind:tableMessage="tableMessage" />
+    <div>
+      <div v-if="activeTab === 'Form.vue'">
+        <Form :onTabButtonClick="onTabButtonClick" :houseHolds="houseHolds" v-bind:formMessage="formMessage" />
+      </div>
+      <div v-if="activeTab === 'Table.vue'">
+        <Table v-model:houseHolds="houseHolds" v-bind:tableMessage="tableMessage" />
+      </div>
     </div>
   </div>
 </template>
