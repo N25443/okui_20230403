@@ -4,7 +4,7 @@
   import { ref } from 'vue';
   const formMessage = '入力';
   const tableMessage = '家計簿';
-  // 選択しているタブをactiveTabとして設定
+  // 表示するタブを識別する変数
   const activeTab = ref('Form.vue');
   // ボタン押下時のアクションをメソッド定義
   const onButtonClick = (tabName: string): void => {

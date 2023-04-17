@@ -7,32 +7,31 @@
         required: true,
       },
     },
-
     setup(props) {
-      type rawType = {
+      type rowType = {
         day: string;
         genre: string;
         content: string;
         money: string;
         way: string;
-        raw6?: string;
-        raw7?: string;
-        raw8?: string;
-        raw9?: string;
-        raw10?: string;
+        row6?: string;
+        row7?: string;
+        row8?: string;
+        row9?: string;
+        row10?: string;
       };
-      const houseHolds: rawType[] = [
+      const houseHolds: rowType[] = [
         {
           day: '4/10',
           genre: '食費',
           content: 'スーパー',
           money: '2500',
           way: 'PayPay',
-          raw6: '0',
-          raw7: '0',
-          raw8: '2',
-          raw9: '0',
-          raw10: '0',
+          row6: '0',
+          row7: '0',
+          row8: '2',
+          row9: '0',
+          row10: '0',
         },
         {
           day: '4/11',
@@ -40,11 +39,11 @@
           content: '飛行機',
           money: '2500',
           way: 'PayPay',
-          raw6: '3',
-          raw7: '0',
-          raw8: '0',
-          raw9: '0',
-          raw10: '0',
+          row6: '3',
+          row7: '0',
+          row8: '0',
+          row9: '0',
+          row10: '0',
         },
         {
           day: '4/12',
@@ -52,11 +51,11 @@
           content: 'スーパー',
           money: '2500',
           way: '現金',
-          raw6: '0',
-          raw7: '0',
-          raw8: '7',
-          raw9: '0',
-          raw10: '0',
+          row6: '0',
+          row7: '0',
+          row8: '7',
+          row9: '0',
+          row10: '0',
         },
         {
           day: '4/13',
@@ -64,11 +63,11 @@
           content: '外食',
           money: '2500',
           way: 'PayPay',
-          raw6: '0',
-          raw7: '6',
-          raw8: '0',
-          raw9: '0',
-          raw10: '10',
+          row6: '0',
+          row7: '6',
+          row8: '0',
+          row9: '0',
+          row10: '10',
         },
       ];
       return { props, houseHolds };
@@ -85,11 +84,11 @@
       <th>内容</th>
       <th>金額(円)</th>
       <th>支払方法</th>
-      <th>raw6</th>
-      <th>raw7</th>
-      <th>raw8</th>
-      <th>raw9</th>
-      <th>raw10</th>
+      <th>row6</th>
+      <th>row7</th>
+      <th>row8</th>
+      <th>row9</th>
+      <th>row10</th>
     </tr>
 
     <tr v-for="houseHold in houseHolds" :key="houseHold.day">
@@ -98,11 +97,11 @@
       <td>{{ houseHold.content }}</td>
       <td>{{ houseHold.money }}</td>
       <td>{{ houseHold.way }}</td>
-      <td>{{ houseHold.raw6 }}</td>
-      <td>{{ houseHold.raw7 }}</td>
-      <td>{{ houseHold.raw8 }}</td>
-      <td>{{ houseHold.raw9 }}</td>
-      <td>{{ houseHold.raw10 }}</td>
+      <td>{{ houseHold.row6 }}</td>
+      <td>{{ houseHold.row7 }}</td>
+      <td>{{ houseHold.row8 }}</td>
+      <td>{{ houseHold.row9 }}</td>
+      <td>{{ houseHold.row10 }}</td>
     </tr>
   </table>
 </template>
