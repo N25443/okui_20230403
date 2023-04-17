@@ -1,15 +1,9 @@
 <script lang="ts">
   import { defineComponent, ref } from 'vue';
-  import type { PropType } from 'vue';
-  import type { rowType } from '@/components/Type.vue';
   export default defineComponent({
     props: {
       formMessage: {
         type: String,
-        required: true,
-      },
-      houseHolds: {
-        type: Array as PropType<rowType[]>,
         required: true,
       },
     },

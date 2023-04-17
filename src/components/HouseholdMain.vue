@@ -78,7 +78,7 @@
     <button @click="onButtonClick('Table.vue')">Tableタブ</button>
 
     <div v-if="activeTab === 'Form.vue'">
-      <Form v-bind="formMessage" />
+      <Form v-bind:formMessage="formMessage" />
     </div>
     <div v-if="activeTab === 'Table.vue'">
       <Table v-model:houseHolds="houseHolds" v-bind:tableMessage="tableMessage" />
