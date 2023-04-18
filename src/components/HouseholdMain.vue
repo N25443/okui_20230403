@@ -17,7 +17,7 @@
       // const d: Day = new Day();
       // const i = d.getFullYear() % 7;
       // alert(tableClass[i]);
-      const formMessage = '入力フォーム';
+      const formMessage = '入力フォーム(金額は半角で入力してください)';
       const tableMessage = '家計簿';
       // 表示するタブを識別する変数
       const activeTab = ref('Form.vue');
