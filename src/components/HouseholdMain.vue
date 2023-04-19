@@ -20,7 +20,9 @@
         onTabButtonClick('Form.vue');
         inputDate.value = date;
       };
-
+      const setInputDate = (date: number): void => {
+        inputDate.value = date;
+      };
       const formDate = reactive({
         year: 2024,
         month: 4,
@@ -74,6 +76,7 @@
         changeFormData,
         formDate,
         inputDate,
+        setInputDate,
       };
     },
   });
@@ -101,6 +104,7 @@
           :houseHolds="houseHolds"
           :formMessage="formMessage"
           :inputDate="inputDate"
+          @setInputDate="setInputDate"
         />
       </div>
       <div v-if="activeTab === 'Table.vue'">

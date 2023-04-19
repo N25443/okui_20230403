@@ -21,7 +21,7 @@
         required: true,
       },
     },
-    setup(props) {
+    setup(props, context) {
       //日付を1から31まで並べる
       const dateListInit = [...Array(31)].map((_, i) => i + 1);
       //日付をリアクティブな変数として定義
@@ -31,20 +31,21 @@
       //プルダウンで選択されている費用の種類　1:食費　2:固定費
       const costKind: Ref<number> = ref(0);
       //プルダウンで入力した日
-      const inputDate: Ref<number> = ref(1);
+      const localInputDate: Ref<number> = ref(props.inputDate);
       //追加ボタンを押下時にテーブルタブに遷移し、該当日に金額が入る
       const onAddButtonClick = (): void => {
+        context.emit('setInputDate', localInputDate);
         // console.log(inputDate.value);
         if (costKind.value === 1) {
-          props.houseHolds[inputDate.value - 1].foodCost = cost.value;
+          props.houseHolds[localInputDate.value - 1].foodCost = cost.value;
           props.onTabButtonClick('Table.vue');
         } else if (costKind.value === 2) {
-          props.houseHolds[inputDate.value - 1].fixedCost = cost.value;
+          props.houseHolds[localInputDate.value - 1].fixedCost = cost.value;
           props.onTabButtonClick('Table.vue');
         }
       };
 
-      return { props, dateList, cost, onAddButtonClick, costKind };
+      return { props, dateList, cost, onAddButtonClick, costKind, localInputDate };
     },
   });
 </script>
@@ -63,7 +64,7 @@
     <select class="border rounded-md">
       <option value="month">4</option>
     </select>
-    <select class="border rounded-md" v-model="inputDate">
+    <select class="border rounded-md" v-model="localInputDate">
       <option v-for="date in dateList" v-bind:key="date">{{ date }}</option>
     </select>
     <select v-model.number="costKind" class="rounded-md bg-red-100">
