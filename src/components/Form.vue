@@ -16,6 +16,10 @@
         type: Function as PropType<(tabName: string) => void>,
         required: true,
       },
+      inputDate: {
+        type: Number,
+        required: true,
+      },
     },
     setup(props) {
       //日付を1から31まで並べる
@@ -26,41 +30,42 @@
       const cost: Ref<number> = ref(0);
       //プルダウンで選択されている費用の種類　1:食費　2:固定費
       const costKind: Ref<number> = ref(0);
+      //プルダウンで入力した日
       const inputDate: Ref<number> = ref(1);
+      //追加ボタンを押下時にテーブルタブに遷移し、該当日に金額が入る
       const onAddButtonClick = (): void => {
-        // console.log('aaa');
-        // console.log(costKind.value);
-        // console.log(typeof costKind.value);
-        // console.log(costKind.value === 1);
-        if (costKind.value == 1) {
+        if (costKind.value === 1) {
           props.houseHolds[inputDate.value - 1].foodCost = cost.value;
           props.onTabButtonClick('Table.vue');
-        } else if (costKind.value == 2) {
+        } else if (costKind.value === 2) {
           props.houseHolds[inputDate.value - 1].fixedCost = cost.value;
           props.onTabButtonClick('Table.vue');
         }
       };
 
-      return { props, dateList, cost, onAddButtonClick, inputDate, costKind };
+      return { props, dateList, cost, onAddButtonClick, costKind };
     },
   });
 </script>
 
 <template>
   <div>
-    <span> {{ props.formMessage }} </span>
-    <br />
-    <label>年月日</label>
-    <select>
+    <span class="rounded-md border bg-blue-400 px-4 text-sm font-bold text-black">
+      {{ props.formMessage }}
+    </span>
+    <p>
+      <label>日付と費用の種類を選択（金額は半角で入力してください）</label>
+    </p>
+    <select class="border rounded-md">
       <option value="year">2023</option>
     </select>
-    <select>
+    <select class="border rounded-md">
       <option value="month">4</option>
     </select>
-    <select v-model="inputDate">
+    <select class="border rounded-md" v-model="inputDate">
       <option v-for="date in dateList" v-bind:key="date">{{ date }}</option>
     </select>
-    <select v-model="costKind">
+    <select v-model.number="costKind" class="rounded-md bg-red-100">
       <option value="0" disabled>選択してください</option>
       <option value="1">食費</option>
       <option value="2">固定費</option>
@@ -74,7 +79,7 @@
       />
       <div class="absolute inset-y-0 right-1 flex my-2">
         <button
-          class="justify-center rounded-md border border-transparent bg-blue-400 px-4 py-1 text-sm font-bold text-white"
+          class="rounded-md border border-transparent bg-blue-400 px-4 text-sm font-bold text-white"
           v-on:click="onAddButtonClick()"
         >
           追加

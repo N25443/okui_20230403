@@ -5,19 +5,8 @@
   import type { rowType } from '@/components/Type.vue';
   export default defineComponent({
     components: { Form, Table },
-    props: {
-      tableMessage: {
-        type: String,
-        required: false,
-      },
-    },
     setup(props) {
-      // テーブルをリアクティブなオブジェクトで定義
-      // const tableClass: string[] = ['', '火', '水', '木', '金', '土', '日'];
-      // const d: Day = new Day();
-      // const i = d.getFullYear() % 7;
-      // alert(tableClass[i]);
-      const formMessage = '入力フォーム(金額は半角で入力してください)';
+      const formMessage = '入力フォーム';
       const tableMessage = '家計簿';
       // 表示するタブを識別する変数
       const activeTab = ref('Form.vue');
@@ -25,7 +14,21 @@
       const onTabButtonClick = (tabName: string): void => {
         activeTab.value = tabName;
       };
+      //テーブルの日付行押下時にタブをFormに切り替えてプルダウンの日付を変更する
+      const inputDate = ref(1);
+      const onDateButtonClick = (date: number): void => {
+        onTabButtonClick('Form.vue');
+        inputDate.value = date;
+      };
 
+      const formDate = reactive({
+        year: 2024,
+        month: 4,
+        day: 1,
+      });
+      const changeFormData = (day: number): void => {
+        formDate.day = day;
+      };
       const houseHolds: rowType[] = reactive([
         { date: 1, day: '土', foodCost: null, fixedCost: null },
         { date: 2, day: '日', foodCost: null, fixedCost: null },
@@ -60,7 +63,18 @@
         { date: 30, day: '月', foodCost: null, fixedCost: null },
         { date: 31, day: '火', foodCost: null, fixedCost: null },
       ]);
-      return { props, formMessage, tableMessage, activeTab, onTabButtonClick, houseHolds };
+      return {
+        props,
+        formMessage,
+        tableMessage,
+        activeTab,
+        onTabButtonClick,
+        houseHolds,
+        onDateButtonClick,
+        changeFormData,
+        formDate,
+        inputDate,
+      };
     },
   });
 </script>
@@ -82,10 +96,20 @@
     </div>
     <div>
       <div v-if="activeTab === 'Form.vue'">
-        <Form :onTabButtonClick="onTabButtonClick" :houseHolds="houseHolds" v-bind:formMessage="formMessage" />
+        <Form
+          :onTabButtonClick="onTabButtonClick"
+          :houseHolds="houseHolds"
+          :formMessage="formMessage"
+          :inputDate="inputDate"
+        />
       </div>
       <div v-if="activeTab === 'Table.vue'">
-        <Table v-model:houseHolds="houseHolds" v-bind:tableMessage="tableMessage" />
+        <Table
+          v-model:houseHolds="houseHolds"
+          v-bind:tableMessage="tableMessage"
+          v-bind:formDate="formDate"
+          @onDateButtonClick="onDateButtonClick"
+        />
       </div>
     </div>
   </div>
