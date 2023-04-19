@@ -5,7 +5,7 @@
   import type { rowType } from '@/components/Type.vue';
   export default defineComponent({
     components: { Form, Table },
-    setup(props) {
+    setup() {
       const formMessage = '入力フォーム';
       const tableMessage = '家計簿';
       // 表示するタブを識別する変数
@@ -66,7 +66,6 @@
         { date: 31, day: '火', foodCost: null, fixedCost: null },
       ]);
       return {
-        props,
         formMessage,
         tableMessage,
         activeTab,

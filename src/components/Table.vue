@@ -14,7 +14,7 @@
       },
     },
     setup(props) {
-      const tableClass: string[] = props.houseHolds.map(function (houseHold) {
+      const tableClass: string[] = props.houseHolds.map((houseHold) => {
         if (houseHold.day === '土') {
           return 'bg-blue-500 bg-opacity-50';
         } else if (houseHold.day === '日') {
