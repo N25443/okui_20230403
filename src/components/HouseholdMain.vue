@@ -109,6 +109,7 @@
       </div>
       <div v-if="activeTab === 'Table.vue'">
         <Table
+          class="cursor-pointer"
           v-model:houseHolds="houseHolds"
           v-bind:tableMessage="tableMessage"
           v-bind:formDate="formDate"
