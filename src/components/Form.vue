@@ -34,6 +34,7 @@
       const inputDate: Ref<number> = ref(1);
       //追加ボタンを押下時にテーブルタブに遷移し、該当日に金額が入る
       const onAddButtonClick = (): void => {
+        // console.log(inputDate.value);
         if (costKind.value === 1) {
           props.houseHolds[inputDate.value - 1].foodCost = cost.value;
           props.onTabButtonClick('Table.vue');

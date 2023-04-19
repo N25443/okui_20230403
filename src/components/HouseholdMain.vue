@@ -24,10 +24,10 @@
       const formDate = reactive({
         year: 2024,
         month: 4,
-        day: 1,
+        date: 1,
       });
-      const changeFormData = (day: number): void => {
-        formDate.day = day;
+      const changeFormData = (date: number): void => {
+        formDate.date = date;
       };
       const houseHolds: rowType[] = reactive([
         { date: 1, day: '土', foodCost: null, fixedCost: null },
