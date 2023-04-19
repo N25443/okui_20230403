@@ -30,22 +30,21 @@
       const cost: Ref<number> = ref(0);
       //プルダウンで選択されている費用の種類　1:食費　2:固定費
       const costKind: Ref<number> = ref(0);
-      //プルダウンで入力した日
-      const localInputDate: Ref<number> = ref(props.inputDate);
+      //Formタブでプルダウンで入力した日
+      const inputDate: Ref<number> = ref(props.inputDate);
       //追加ボタンを押下時にテーブルタブに遷移し、該当日に金額が入る
       const onAddButtonClick = (): void => {
-        context.emit('setInputDate', localInputDate);
-        // console.log(inputDate.value);
+        context.emit('setInputDate', inputDate);
         if (costKind.value === 1) {
-          props.houseHolds[localInputDate.value - 1].foodCost = cost.value;
+          props.houseHolds[inputDate.value - 1].foodCost = cost.value;
           props.onTabButtonClick('Table.vue');
         } else if (costKind.value === 2) {
-          props.houseHolds[localInputDate.value - 1].fixedCost = cost.value;
+          props.houseHolds[inputDate.value - 1].fixedCost = cost.value;
           props.onTabButtonClick('Table.vue');
         }
       };
 
-      return { props, dateList, cost, onAddButtonClick, costKind, localInputDate };
+      return { props, dateList, cost, onAddButtonClick, costKind, inputDate };
     },
   });
 </script>
@@ -64,7 +63,7 @@
     <select class="border rounded-md">
       <option value="month">4</option>
     </select>
-    <select class="border rounded-md" v-model="localInputDate">
+    <select class="border rounded-md" v-model="inputDate">
       <option v-for="date in dateList" v-bind:key="date">{{ date }}</option>
     </select>
     <select v-model.number="costKind" class="rounded-md bg-red-100">
