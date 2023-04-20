@@ -1,7 +1,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import type { PropType } from 'vue';
-  import type { rowType, dayOfWeekType } from '@/components/Type.vue';
+  import type { rowType } from '@/components/Type.vue';
   import { DAY_OF_WEEKS } from '@/components/Const.vue';
   export default defineComponent({
     props: {
@@ -12,10 +12,6 @@
       houseHolds: {
         type: Array as PropType<rowType[]>,
         required: true,
-      },
-      DAY_OF_WEEKS: {
-        type: Array as PropType<dayOfWeekType[]>,
-        required: false,
       },
     },
     setup(props) {
