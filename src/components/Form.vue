@@ -12,7 +12,7 @@
         type: Array as PropType<rowType[]>,
         required: true,
       },
-      onTabButtonClick: {
+      changeTab: {
         type: Function as PropType<(tabName: string) => void>,
         required: true,
       },
@@ -22,8 +22,8 @@
       },
     },
     setup(props, context) {
-      //日付を1から31まで配列にいれる
-      const dateList = [...Array(31)].map((_, i) => i + 1);
+      //日付を1から30まで配列にいれる
+      const dateList = [...Array(30)].map((_, i) => i + 1);
       //入力する費用を格納する変数
       const cost: Ref<number> = ref(0);
       //プルダウンで選択されている費用の種類　1:食費　2:固定費
@@ -32,13 +32,15 @@
       const inputDate: Ref<number> = ref(props.inputDate);
       //追加ボタンを押下時にテーブルタブに遷移し、該当日に金額が入る
       const onAddButtonClick = (): void => {
+        //子から親コンポーネントへイベントを通知する
         context.emit('setInputDate', inputDate);
+
         if (costKind.value === 1) {
           props.houseHolds[inputDate.value - 1].foodCost = cost.value;
         } else if (costKind.value === 2) {
           props.houseHolds[inputDate.value - 1].fixedCost = cost.value;
         }
-        props.onTabButtonClick('Table.vue');
+        props.changeTab('Table.vue');
       };
 
       return { props, dateList, cost, onAddButtonClick, costKind, inputDate };
