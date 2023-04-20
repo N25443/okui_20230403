@@ -1,7 +1,8 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import type { PropType } from 'vue';
-  import type { rowType } from '@/components/Type.vue';
+  import type { rowType, dayOfWeekType } from '@/components/Type.vue';
+  import { DAY_OF_WEEKS } from '@/components/Const.vue';
   export default defineComponent({
     props: {
       tableMessage: {
@@ -12,19 +13,13 @@
         type: Array as PropType<rowType[]>,
         required: true,
       },
+      DAY_OF_WEEKS: {
+        type: Array as PropType<dayOfWeekType[]>,
+        required: false,
+      },
     },
     setup(props) {
-      const tableClass: string[] = props.houseHolds.map((houseHold) => {
-        if (houseHold.day === '土') {
-          return 'bg-blue-500 bg-opacity-50';
-        } else if (houseHold.day === '日') {
-          return 'bg-red-500 bg-opacity-50';
-        } else {
-          return '';
-        }
-      });
-
-      return { props, tableClass };
+      return { props, DAY_OF_WEEKS };
     },
   });
 </script>
@@ -45,7 +40,7 @@
         @click="$emit('onDateButtonClick', houseHold.date)"
         v-for="(houseHold, index) in houseHolds"
         :key="houseHold.date"
-        :class="tableClass[index]"
+        :class="DAY_OF_WEEKS[index % 7].color"
       >
         <td>{{ houseHold.date }}</td>
         <td>{{ houseHold.day }}</td>
