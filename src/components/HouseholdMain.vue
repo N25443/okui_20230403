@@ -2,8 +2,8 @@
   import Form from '@/components/Form.vue';
   import Table from '@/components/Table.vue';
   import { ref, reactive, defineComponent } from 'vue';
-  import type { rowType } from '@/components/Type.vue';
-  import { DAY_OF_WEEKS } from '@/components/Const.vue';
+  import type { rowType } from '@/components/Type';
+  import { DAY_OF_WEEKS } from '@/components/Const';
   export default defineComponent({
     components: { Form, Table },
     setup() {

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { defineComponent, ref } from 'vue';
   import type { PropType, Ref } from 'vue';
-  import type { rowType } from '@/components/Type.vue';
+  import type { rowType } from '@/components/Type';
   export default defineComponent({
     props: {
       formMessage: {
@@ -33,8 +33,8 @@
       //追加ボタンを押下時にテーブルタブに遷移し、該当日に金額が入る
       const onAddButtonClick = (): void => {
         //子から親コンポーネントへイベントを通知する
-        //HouseholdMain.vueのset up内の変数inputDateを引数としてForm.vueに受け渡す方法がわからなかったので、
-        //代わりにメソッドsetInputDateをemitで子から親にイベントの発生タイミングを通知（メソッドはHouseholdsMain.vueに定義）
+        /*HouseholdMain.vueのset up内の変数inputDateを引数としてForm.vueに受け渡す方法がわからなかったので、
+        代わりにメソッドsetInputDateをemitで子から親にイベントの発生タイミングを通知（メソッドはHouseholdsMain.vueに定義）*/
         context.emit('setInputDate', inputDate);
         if (costKind.value === 1) {
           props.houseHolds[inputDate.value - 1].foodCost = cost.value;
