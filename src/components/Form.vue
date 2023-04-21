@@ -1,7 +1,7 @@
 <script lang="ts">
   import { defineComponent, ref } from 'vue';
   import type { PropType, Ref } from 'vue';
-  import type { rowType } from '@/components/Type.vue';
+  import type { rowType } from '@/components/Type';
   export default defineComponent({
     props: {
       formMessage: {

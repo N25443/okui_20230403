@@ -1,8 +1,8 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import type { PropType } from 'vue';
-  import type { rowType } from '@/components/Type.vue';
-  import { DAY_OF_WEEKS } from '@/components/Const.vue';
+  import type { rowType } from '@/components/Type';
+  import { DAY_OF_WEEKS } from '@/components/Const';
   export default defineComponent({
     props: {
       tableMessage: {
