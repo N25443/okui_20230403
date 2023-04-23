@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useTableStore } from '@/stores/table';
   import Form from '@/components/Form.vue';
   import Table from '@/components/Table.vue';
   import { ref, reactive, defineComponent } from 'vue';
@@ -7,6 +8,16 @@
   export default defineComponent({
     components: { Form, Table },
     setup() {
+      //pinia動作確認
+      const tableStore = useTableStore();
+      // この段階では1と表示される
+      // console.log(tableStore.counter);
+      // stateの値を書き換える
+      tableStore.setCounter(2);
+      // storeの値が書き換わり2と表示される
+      // console.log(tableStore.counter);
+      // console.log(tableStore.members);
+
       const formMessage = '入力フォーム';
       const tableMessage = '家計簿';
       // 表示するタブを識別する変数
@@ -42,6 +53,7 @@
       }));
 
       return {
+        tableStore,
         formMessage,
         tableMessage,
         activeTab,

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useTableStore } from '@/stores/table';
   import { defineComponent } from 'vue';
   import type { PropType } from 'vue';
   import type { rowType } from '@/components/Type';
@@ -15,7 +16,12 @@
       },
     },
     setup(props) {
-      return { props, DAY_OF_WEEKS };
+      const tableStore = useTableStore();
+      tableStore.setNewMembers('hoge');
+      // console.log(tableStore.members);
+      tableStore.deleteMember('hoge');
+      // console.log(tableStore.members);
+      return { props, DAY_OF_WEEKS, tableStore };
     },
   });
 </script>

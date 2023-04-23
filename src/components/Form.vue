@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useTableStore } from '@/stores/table';
   import { defineComponent, ref } from 'vue';
   import type { PropType, Ref } from 'vue';
   import type { rowType } from '@/components/Type';
@@ -22,6 +23,11 @@
       },
     },
     setup(props, context) {
+      //pinia動作確認
+      const tableStore = useTableStore();
+      tableStore.setNewMembers('jiro');
+      // console.log(tableStore.members);
+
       //日付を1から30まで配列にいれる
       const dateList = [...Array(30)].map((_, i) => i + 1);
       //入力する費用を格納する変数
