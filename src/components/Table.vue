@@ -10,10 +10,10 @@
         type: String,
         required: true,
       },
-      houseHolds: {
-        type: Array as PropType<rowType[]>,
-        required: true,
-      },
+      // houseHolds: {
+      //   type: Array as PropType<rowType[]>,
+      //   required: true,
+      // },
     },
     setup(props) {
       const tableStore = useTableStore();
@@ -36,7 +36,7 @@
 
       <tr
         @click="$emit('onDateButtonClick', houseHold.date)"
-        v-for="(houseHold, index) in houseHolds"
+        v-for="(houseHold, index) in tableStore.houseHolds"
         :key="houseHold.date"
         :class="DAY_OF_WEEKS[index % 7].color"
       >

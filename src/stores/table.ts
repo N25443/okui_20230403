@@ -15,23 +15,28 @@ export const useTableStore = defineStore({
   getters: {},
   actions: {
     setNewFoodCost(foodCost: number) {
-      // eslint-disable-next-line no-console
-      console.log('setNewFoodCost');
-      this.state.houseHolds.foodCost = foodCost;
+      const houseHolds = this.houseHolds.map((houseHold: rowType) => ({
+        ...houseHold,
+        foodCost,
+      }));
+      return houseHolds;
     },
     setNewFixedCost(fixedCost: number) {
-      // eslint-disable-next-line no-console
-      console.log('setNewFixedCost');
-      this.state.fixedCost = fixedCost;
+      const houseHolds = this.houseHolds.map((houseHold: rowType) => ({
+        ...houseHold,
+        fixedCost,
+      }));
+      return houseHolds;
     },
     updateHouseHolds(houseHolds: rowType[]) {
       this.houseHolds = houseHolds;
     },
     initCosts() {
-      // eslint-disable-next-line no-console
-      console.log('initCosts');
-      this.state.foodCost = null;
-      this.state.fixedCost = null;
+      const houseHolds = this.houseHolds.map((houseHold: rowType) => ({
+        ...houseHold,
+        foodCost: null,
+      }));
+      return houseHolds;
     },
   },
 });
