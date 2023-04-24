@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useTableStore } from '@/stores/table';
   import { defineComponent, ref } from 'vue';
   import type { PropType, Ref } from 'vue';
   import type { rowType } from '@/components/Type';
@@ -22,6 +23,12 @@
       },
     },
     setup(props, context) {
+      const tableStore = useTableStore();
+      const onAllResetButtonClick = (): void => {
+        tableStore.initCosts();
+        props.changeTab('Table.vue');
+      };
+
       //日付を1から30まで配列にいれる
       const dateList = [...Array(30)].map((_, i) => i + 1);
       //入力する費用を格納する変数
@@ -43,8 +50,7 @@
         }
         props.changeTab('Table.vue');
       };
-
-      return { props, dateList, cost, onAddButtonClick, costKind, inputDate };
+      return { props, dateList, cost, onAddButtonClick, costKind, inputDate, onAllResetButtonClick };
     },
   });
 </script>
@@ -86,6 +92,11 @@
           追加
         </button>
       </div>
+    </div>
+    <div class="py-10 px-20 pr-2">
+      <button @click="onAllResetButtonClick()" class="block w-60 h-8 rounded-md border-red-900 bg-red-500 text-white">
+        家計簿をリセットする!!
+      </button>
     </div>
   </div>
 </template>
