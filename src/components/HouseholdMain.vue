@@ -1,12 +1,12 @@
 <script lang="ts">
+  import { useTableStore } from '@/stores/table';
   import Form from '@/components/Form.vue';
   import Table from '@/components/Table.vue';
   import { ref, reactive, defineComponent } from 'vue';
-  import type { rowType } from '@/components/Type';
-  import { DAY_OF_WEEKS } from '@/components/Const';
   export default defineComponent({
     components: { Form, Table },
     setup() {
+      const tableStore = useTableStore();
       const formMessage = '入力フォーム';
       const tableMessage = '家計簿';
       // 表示するタブを識別する変数
@@ -33,20 +33,12 @@
         formDate.date = date;
       };
 
-      //カレンダーに表示する内容の配列
-      const houseHolds: rowType[] = [...Array(30)].map((_, i) => ({
-        date: i + 1,
-        day: DAY_OF_WEEKS[i % 7].name,
-        foodCost: null,
-        fixedCost: null,
-      }));
-
       return {
+        tableStore,
         formMessage,
         tableMessage,
         activeTab,
         changeTab,
-        houseHolds,
         onDateButtonClick,
         changeFormData,
         formDate,
@@ -76,7 +68,7 @@
       <div v-if="activeTab === 'Form.vue'">
         <Form
           :changeTab="changeTab"
-          :houseHolds="houseHolds"
+          :houseHolds="tableStore.$state.houseHolds"
           :formMessage="formMessage"
           :inputDate="inputDate"
           @setInputDate="setInputDate"
@@ -85,7 +77,7 @@
       <div v-if="activeTab === 'Table.vue'">
         <Table
           class="cursor-pointer"
-          v-model:houseHolds="houseHolds"
+          v-model:houseHolds="tableStore.$state.houseHolds"
           v-bind:tableMessage="tableMessage"
           v-bind:formDate="formDate"
           @onDateButtonClick="onDateButtonClick"
