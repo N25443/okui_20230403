@@ -14,29 +14,21 @@ export const useTableStore = defineStore({
   }),
   getters: {},
   actions: {
-    setNewFoodCost(foodCost: number) {
-      const houseHolds = this.houseHolds.map((houseHold: rowType) => ({
-        ...houseHold,
-        foodCost,
-      }));
-      return houseHolds;
+    setNewFoodCost(i: number, foodCost: number) {
+      this.houseHolds[i].foodCost = foodCost;
     },
-    setNewFixedCost(fixedCost: number) {
-      const houseHolds = this.houseHolds.map((houseHold: rowType) => ({
-        ...houseHold,
-        fixedCost,
-      }));
-      return houseHolds;
+    setNewFixedCost(i: number, fixedCost: number) {
+      this.houseHolds[i].fixedCost = fixedCost;
     },
     updateHouseHolds(houseHolds: rowType[]) {
       this.houseHolds = houseHolds;
     },
     initCosts() {
-      const houseHolds = this.houseHolds.map((houseHold: rowType) => ({
+      this.houseHolds = this.houseHolds.map((houseHold: rowType) => ({
         ...houseHold,
         foodCost: null,
+        fixedCost: null,
       }));
-      return houseHolds;
     },
   },
 });

@@ -1,8 +1,6 @@
 <script lang="ts">
   import { useTableStore } from '@/stores/table';
   import { defineComponent } from 'vue';
-  import type { PropType } from 'vue';
-  import type { rowType } from '@/components/Type';
   import { DAY_OF_WEEKS } from '@/components/Const';
   export default defineComponent({
     props: {
@@ -10,10 +8,6 @@
         type: String,
         required: true,
       },
-      // houseHolds: {
-      //   type: Array as PropType<rowType[]>,
-      //   required: true,
-      // },
     },
     setup(props) {
       const tableStore = useTableStore();

@@ -2,15 +2,10 @@
   import { useTableStore } from '@/stores/table';
   import { defineComponent, ref } from 'vue';
   import type { PropType, Ref } from 'vue';
-  import type { rowType } from '@/components/Type';
   export default defineComponent({
     props: {
       formMessage: {
         type: String,
-        required: true,
-      },
-      houseHolds: {
-        type: Array as PropType<rowType[]>,
         required: true,
       },
       changeTab: {
@@ -44,9 +39,9 @@
         代わりにメソッドsetInputDateをemitで子から親にイベントの発生タイミングを通知（メソッドはHouseholdsMain.vueに定義）*/
         context.emit('setInputDate', inputDate);
         if (costKind.value === 1) {
-          props.houseHolds[inputDate.value - 1].foodCost = cost.value;
+          tableStore.setNewFoodCost(inputDate.value - 1, cost.value);
         } else if (costKind.value === 2) {
-          props.houseHolds[inputDate.value - 1].fixedCost = cost.value;
+          tableStore.setNewFixedCost(inputDate.value - 1, cost.value);
         }
         props.changeTab('Table.vue');
       };
