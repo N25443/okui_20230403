@@ -14,16 +14,13 @@ export const useTableStore = defineStore({
   }),
   getters: {},
   actions: {
-    setNewFoodCost(i: number, foodCost: number) {
+    setFoodCost(i: number, foodCost: number) {
       this.houseHolds[i].foodCost = foodCost;
     },
-    setNewFixedCost(i: number, fixedCost: number) {
+    setFixedCost(i: number, fixedCost: number) {
       this.houseHolds[i].fixedCost = fixedCost;
     },
-    updateHouseHolds(houseHolds: rowType[]) {
-      this.houseHolds = houseHolds;
-    },
-    initCosts() {
+    initAllCosts() {
       this.houseHolds = this.houseHolds.map((houseHold: rowType) => ({
         ...houseHold,
         foodCost: null,

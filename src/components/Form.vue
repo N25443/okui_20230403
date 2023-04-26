@@ -20,7 +20,7 @@
     setup(props, context) {
       const tableStore = useTableStore();
       const onAllResetButtonClick = (): void => {
-        tableStore.initCosts();
+        tableStore.initAllCosts();
         props.changeTab('Table.vue');
       };
 
@@ -38,10 +38,12 @@
         /*HouseholdMain.vueのset up内の変数inputDateを引数としてForm.vueに受け渡す方法がわからなかったので、
         代わりにメソッドsetInputDateをemitで子から親にイベントの発生タイミングを通知（メソッドはHouseholdsMain.vueに定義）*/
         context.emit('setInputDate', inputDate);
-        if (costKind.value === 1) {
-          tableStore.setNewFoodCost(inputDate.value - 1, cost.value);
+        if (costKind.value === 0) {
+          return;
+        } else if (costKind.value === 1) {
+          tableStore.setFoodCost(inputDate.value - 1, cost.value);
         } else if (costKind.value === 2) {
-          tableStore.setNewFixedCost(inputDate.value - 1, cost.value);
+          tableStore.setFixedCost(inputDate.value - 1, cost.value);
         }
         props.changeTab('Table.vue');
       };

@@ -66,20 +66,13 @@
     </div>
     <div>
       <div v-if="activeTab === 'Form.vue'">
-        <Form
-          :changeTab="changeTab"
-          :houseHolds="tableStore.$state.houseHolds"
-          :formMessage="formMessage"
-          :inputDate="inputDate"
-          @setInputDate="setInputDate"
-        />
+        <Form :changeTab="changeTab" :formMessage="formMessage" :inputDate="inputDate" @setInputDate="setInputDate" />
       </div>
       <div v-if="activeTab === 'Table.vue'">
         <Table
           class="cursor-pointer"
-          v-model:houseHolds="tableStore.$state.houseHolds"
-          v-bind:tableMessage="tableMessage"
-          v-bind:formDate="formDate"
+          :tableMessage="tableMessage"
+          :formDate="formDate"
           @onDateButtonClick="onDateButtonClick"
         />
       </div>
