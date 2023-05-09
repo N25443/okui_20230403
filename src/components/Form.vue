@@ -1,6 +1,7 @@
 <script lang="ts">
+  import { usePostalCodeStore } from '@/stores/postalCode';
   import { useTableStore } from '@/stores/table';
-  import { defineComponent, ref } from 'vue';
+  import { computed, defineComponent, reactive, ref, toRefs } from 'vue';
   import type { PropType, Ref } from 'vue';
   export default defineComponent({
     props: {
@@ -18,11 +19,15 @@
       },
     },
     setup(props, context) {
+      const zipcode = ref('530-6034');
       const tableStore = useTableStore();
       const onAllResetButtonClick = (): void => {
         tableStore.initAllCosts();
         props.changeTab('Table.vue');
       };
+
+      const postalCodeStore = usePostalCodeStore();
+      const postalCodeStoreAddressRef = toRefs(postalCodeStore);
 
       //日付を1から30まで配列にいれる
       const dateList = [...Array(30)].map((_, i) => i + 1);
@@ -48,7 +53,18 @@
         }
         props.changeTab('Table.vue');
       };
-      return { props, dateList, cost, onAddButtonClick, costKind, inputDate, onAllResetButtonClick };
+      return {
+        props,
+        dateList,
+        cost,
+        onAddButtonClick,
+        costKind,
+        inputDate,
+        onAllResetButtonClick,
+        zipcode,
+        postalCodeStoreAddressRef,
+        postalCodeStore,
+      };
     },
   });
 </script>
@@ -95,6 +111,25 @@
       <button @click="onAllResetButtonClick()" class="block w-60 h-8 rounded-md border-red-900 bg-red-500 text-white">
         家計簿をリセットする!!
       </button>
+    </div>
+    <div>
+      <input
+        type="text"
+        class="block w-full h-10 rounded-md border-gray-300 bg-gray-100 pl-7 pr-12"
+        v-model="zipcode"
+      />
+      <button
+        class="rounded-md border border-transparent bg-blue-400 px-4 text-sm font-bold text-white"
+        @click="() => postalCodeStore.setAddress(zipcode)"
+      >
+        決定
+      </button>
+      <br />
+      結果：<input type="text" class="textline bg-sky-200" :value="postalCodeStore.address.results[0].address1" />
+      <br />
+
+      大元でtoRefし、中身を取得<br />
+      {{ postalCodeStoreAddressRef.address.value.results[0] }}
     </div>
   </div>
 </template>
