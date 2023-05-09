@@ -28,7 +28,7 @@
 
       const postalCodeStore = usePostalCodeStore();
       const postalCodeStoreAddressRef = toRefs(postalCodeStore);
-
+      
       //日付を1から30まで配列にいれる
       const dateList = [...Array(30)].map((_, i) => i + 1);
       //入力する費用を格納する変数

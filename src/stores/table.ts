@@ -1,3 +1,4 @@
+
 import { defineStore } from 'pinia';
 import { DAY_OF_WEEKS } from '@/components/Const';
 import type { rowType } from '@/components/Type';
@@ -26,6 +27,7 @@ export const useTableStore = defineStore({
         foodCost: null,
         fixedCost: null,
       }));
+
     },
   },
 });
