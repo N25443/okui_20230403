@@ -2,15 +2,10 @@
   import { useTableStore } from '@/stores/table';
   import { defineComponent, ref } from 'vue';
   import type { PropType, Ref } from 'vue';
-  import type { rowType } from '@/components/Type';
   export default defineComponent({
     props: {
       formMessage: {
         type: String,
-        required: true,
-      },
-      houseHolds: {
-        type: Array as PropType<rowType[]>,
         required: true,
       },
       changeTab: {
@@ -23,11 +18,11 @@
       },
     },
     setup(props, context) {
-      //pinia動作確認
       const tableStore = useTableStore();
-      tableStore.setNewMembers('jiro');
-      // console.log(tableStore.members);
-
+      const onAllResetButtonClick = (): void => {
+        tableStore.initAllCosts();
+        props.changeTab('Table.vue');
+      };
       //日付を1から30まで配列にいれる
       const dateList = [...Array(30)].map((_, i) => i + 1);
       //入力する費用を格納する変数
@@ -38,19 +33,21 @@
       const inputDate: Ref<number> = ref(props.inputDate);
       //追加ボタンを押下時にテーブルタブに遷移し、該当日に金額が入る
       const onAddButtonClick = (): void => {
+        if (costKind.value === 0) {
+          return;
+        }
         //子から親コンポーネントへイベントを通知する
-        //HouseholdMain.vueのset up内の変数inputDateを引数としてForm.vueに受け渡す方法がわからなかったので、
-        //代わりにメソッドsetInputDateをemitで子から親にイベントの発生タイミングを通知（メソッドはHouseholdsMain.vueに定義）
+        /*HouseholdMain.vueのset up内の変数inputDateを引数としてForm.vueに受け渡す方法がわからなかったので、
+        代わりにメソッドsetInputDateをemitで子から親にイベントの発生タイミングを通知（メソッドはHouseholdsMain.vueに定義）*/
         context.emit('setInputDate', inputDate);
         if (costKind.value === 1) {
-          props.houseHolds[inputDate.value - 1].foodCost = cost.value;
+          tableStore.setFoodCost(inputDate.value - 1, cost.value);
         } else if (costKind.value === 2) {
-          props.houseHolds[inputDate.value - 1].fixedCost = cost.value;
+          tableStore.setFixedCost(inputDate.value - 1, cost.value);
         }
         props.changeTab('Table.vue');
       };
-
-      return { props, dateList, cost, onAddButtonClick, costKind, inputDate };
+      return { props, dateList, cost, onAddButtonClick, costKind, inputDate, onAllResetButtonClick };
     },
   });
 </script>
@@ -92,6 +89,11 @@
           追加
         </button>
       </div>
+    </div>
+    <div class="py-10 px-20 pr-2">
+      <button @click="onAllResetButtonClick()" class="block w-60 h-8 rounded-md border-red-900 bg-red-500 text-white">
+        家計簿をリセットする!!
+      </button>
     </div>
   </div>
 </template>

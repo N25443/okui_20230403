@@ -1,30 +1,33 @@
-import { storeToRefs } from 'pinia';
+
 import { defineStore } from 'pinia';
+import { DAY_OF_WEEKS } from '@/components/Const';
+import type { rowType } from '@/components/Type';
 export const useTableStore = defineStore({
-  id: 'table',
+  id: 'tableStore',
   state: () => ({
-    counter: 1,
-    members: ['taro', 'hanako'],
+    //カレンダーに表示する内容の配列
+    houseHolds: [...Array(30)].map((_, i) => ({
+      date: i + 1,
+      day: DAY_OF_WEEKS[i % 7].name,
+      foodCost: null,
+      fixedCost: null,
+    })) as rowType[],
   }),
-  getters: {
-    getDoubleCounter: (state) => state.counter * 2,
-    getInitialMembers: (state) => state.members.filter((elm) => ['taro', 'hanako'].includes(elm)),
-  },
+  getters: {},
   actions: {
-    setCounter(newCounter: number) {
-      this.counter = newCounter;
+    setFoodCost(i: number, foodCost: number) {
+      this.houseHolds[i].foodCost = foodCost;
     },
-    setNewMembers(member: string) {
-      this.members = [...this.members, member];
+    setFixedCost(i: number, fixedCost: number) {
+      this.houseHolds[i].fixedCost = fixedCost;
     },
-    updateMembers(members: string[]) {
-      this.members = members;
-    },
-    deleteMember(member: string) {
-      this.members = this.members.filter((elm) => elm !== member);
-    },
-    initMembers() {
-      this.members = ['taro', 'hanako'];
+    initAllCosts() {
+      this.houseHolds = this.houseHolds.map((houseHold: rowType) => ({
+        ...houseHold,
+        foodCost: null,
+        fixedCost: null,
+      }));
+
     },
   },
 });

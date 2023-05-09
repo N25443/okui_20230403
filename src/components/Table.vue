@@ -1,8 +1,6 @@
 <script lang="ts">
   import { useTableStore } from '@/stores/table';
   import { defineComponent } from 'vue';
-  import type { PropType } from 'vue';
-  import type { rowType } from '@/components/Type';
   import { DAY_OF_WEEKS } from '@/components/Const';
   export default defineComponent({
     props: {
@@ -10,17 +8,9 @@
         type: String,
         required: true,
       },
-      houseHolds: {
-        type: Array as PropType<rowType[]>,
-        required: true,
-      },
     },
     setup(props) {
       const tableStore = useTableStore();
-      tableStore.setNewMembers('hoge');
-      // console.log(tableStore.members);
-      tableStore.deleteMember('hoge');
-      // console.log(tableStore.members);
       return { props, DAY_OF_WEEKS, tableStore };
     },
   });
@@ -40,7 +30,7 @@
 
       <tr
         @click="$emit('onDateButtonClick', houseHold.date)"
-        v-for="(houseHold, index) in houseHolds"
+        v-for="(houseHold, index) in tableStore.houseHolds"
         :key="houseHold.date"
         :class="DAY_OF_WEEKS[index % 7].color"
       >

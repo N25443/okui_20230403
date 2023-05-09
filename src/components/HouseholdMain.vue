@@ -3,21 +3,10 @@
   import Form from '@/components/Form.vue';
   import Table from '@/components/Table.vue';
   import { ref, reactive, defineComponent } from 'vue';
-  import type { rowType } from '@/components/Type';
-  import { DAY_OF_WEEKS } from '@/components/Const';
   export default defineComponent({
     components: { Form, Table },
     setup() {
-      //pinia動作確認
       const tableStore = useTableStore();
-      // この段階では1と表示される
-      // console.log(tableStore.counter);
-      // stateの値を書き換える
-      tableStore.setCounter(2);
-      // storeの値が書き換わり2と表示される
-      // console.log(tableStore.counter);
-      // console.log(tableStore.members);
-
       const formMessage = '入力フォーム';
       const tableMessage = '家計簿';
       // 表示するタブを識別する変数
@@ -44,21 +33,12 @@
         formDate.date = date;
       };
 
-      //カレンダーに表示する内容の配列
-      const houseHolds: rowType[] = [...Array(30)].map((_, i) => ({
-        date: i + 1,
-        day: DAY_OF_WEEKS[i % 7].name,
-        foodCost: null,
-        fixedCost: null,
-      }));
-
       return {
         tableStore,
         formMessage,
         tableMessage,
         activeTab,
         changeTab,
-        houseHolds,
         onDateButtonClick,
         changeFormData,
         formDate,
@@ -86,20 +66,13 @@
     </div>
     <div>
       <div v-if="activeTab === 'Form.vue'">
-        <Form
-          :changeTab="changeTab"
-          :houseHolds="houseHolds"
-          :formMessage="formMessage"
-          :inputDate="inputDate"
-          @setInputDate="setInputDate"
-        />
+        <Form :changeTab="changeTab" :formMessage="formMessage" :inputDate="inputDate" @setInputDate="setInputDate" />
       </div>
       <div v-if="activeTab === 'Table.vue'">
         <Table
           class="cursor-pointer"
-          v-model:houseHolds="houseHolds"
-          v-bind:tableMessage="tableMessage"
-          v-bind:formDate="formDate"
+          :tableMessage="tableMessage"
+          :formDate="formDate"
           @onDateButtonClick="onDateButtonClick"
         />
       </div>
